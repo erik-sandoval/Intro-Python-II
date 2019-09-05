@@ -74,13 +74,26 @@ while True:
             print(f"Press '{k}' to go {v.name}")
 
     direction = input(
-        "Please choose a direction from the above options, pick up the item found on the floor: ")
+        "Please choose a direction from the above options, pick up the item found on the floor: ").lower()
 
-    if (direction == 'n'):
+    direction = direction.strip().split(maxsplit=1)
+
+    if (direction[0] == 'n'):
         player.current_room = player.current_room.n_to
-    elif (direction == 'e'):
+    elif (direction[0] == 'e'):
         player.current_room = player.current_room.e_to
-    elif (direction == 's'):
+    elif (direction[0] == 's'):
         player.current_room = player.current_room.s_to
-    elif (direction == 'w'):
+    elif (direction[0] == 'w'):
         player.current_room = player.current_room.w_to
+    elif (direction[0] == 'take' or direction[0] == 'grab'):
+        if(len(direction) == 2):
+            if (player.current_room.items.name.lower() == direction[1]):
+                player.addItem(direction[1])
+            else:
+                print(
+                    f"{direction[1]} not found in {player.current_room.name}")
+        else:
+            print("Specify item to grab")
+    else:
+        print(f"input not recognized, please follow instructions")
