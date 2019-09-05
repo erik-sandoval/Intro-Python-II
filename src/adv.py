@@ -48,8 +48,6 @@ room['treasure'].s_to = room['narrow']
 #
 # Make a new player object that is currently in the 'outside' room.
 
-print(room["outside"].items)
-
 player = Player("Erik", room["outside"])
 
 # Write a loop that:
@@ -62,3 +60,27 @@ player = Player("Erik", room["outside"])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+while True:
+    avail_rooms = dict(n=player.current_room.n_to, w=player.current_room.w_to,
+                       s=player.current_room.s_to, e=player.current_room.e_to)
+
+    print(f'You are at {player.current_room.name}')
+    print(f'You look down and find a {player.current_room.items.name}')
+
+    for k, v in avail_rooms.items():
+        if (v != None):
+            print(f"Press '{k}' to go {v.name}")
+
+    direction = input(
+        "Please choose a direction from the above options, pick up the item found on the floor: ")
+
+    if (direction == 'n'):
+        player.current_room = player.current_room.n_to
+    elif (direction == 'e'):
+        player.current_room = player.current_room.e_to
+    elif (direction == 's'):
+        player.current_room = player.current_room.s_to
+    elif (direction == 'w'):
+        player.current_room = player.current_room.w_to
