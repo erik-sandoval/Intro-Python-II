@@ -11,5 +11,8 @@ class Player():
     def addItem(self, item):
         return self.items.append(item)
 
+    def dropItem(self, item):
+        self.items.remove(item)
+
     def __repr__(self):
         return f"name: {self.name}, current_room: {self.current_room},"
