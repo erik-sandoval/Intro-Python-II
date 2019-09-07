@@ -67,14 +67,18 @@ while True:
                        s=player.current_room.s_to, e=player.current_room.e_to)
 
     print(f'You are at {player.current_room.name}')
-    print(f'You look down and find a {player.current_room.items.name}')
+
+    if (player.current_room.items == None):
+                print("The room is empty")
+    else:
+        print(f'You look down and find a {player.current_room.items.name}\n\n')
 
     for k, v in avail_rooms.items():
         if (v != None):
             print(f"Press '{k}' to go {v.name}")
 
     direction = input(
-        "Please choose a direction from the above options, pick up the item found on the floor: ").lower()
+        "\n\n Please choose a direction from the above options, pick up the item found on the floor: ").lower()
 
     direction = direction.strip().split(maxsplit=1)
 
@@ -90,6 +94,8 @@ while True:
         if(len(direction) == 2):
             if (player.current_room.items.name.lower() == direction[1]):
                 player.addItem(direction[1])
+                player.current_room.items = None
+                print(f"{direction[1]} picked up\n\n")
             else:
                 print(
                     f"{direction[1]} not found in {player.current_room.name}")
